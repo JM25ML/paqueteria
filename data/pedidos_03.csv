@@ -1,0 +1,11 @@
+pedido_id;codigo_cliente;provincia;bultos;peso_total_kg
+PV-1001;CL-0107;Valencia;1;1.8
+PV-1002;CL-0114;Valencia;2;6.5
+PV-1003;CL-0121;Valencia;1;5
+PV-1004;CL-0128;Valencia;5;58
+PV-1006;CL-0142;Valencia;10;2
+PV-1007;CL-0149;Valencia;20;70
+PV-1009;CL-0163;Valencia;25;30
+PV-1010;CL-0170;Valencia;100;180
+PV-1011;CL-2011;Vizcaya;2;50
+PV-1012;CL-2014;Madrid;50;80
