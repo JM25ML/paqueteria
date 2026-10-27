@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asignador de paquetería</title>
+  <meta name="description" content="Elige el transportista más barato para cada pedido a partir de las tarifas pactadas.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script type="module" src="src/ui/app.js"></script>
+</head>
+<body>
+  <header class="barra">
+    <a href="#home" class="marca"><span aria-hidden="true">📦</span> Asignador de paquetería</a>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <p id="arranque" class="nota">Cargando tarifas…</p>
+    <section id="pantalla-home" class="pantalla" hidden></section>
+    <section id="pantalla-cargar" class="pantalla" hidden></section>
+    <section id="pantalla-tarifas" class="pantalla" hidden></section>
+    <section id="pantalla-pedidos" class="pantalla" hidden></section>
+    <section id="pantalla-resultado" class="pantalla" hidden></section>
+  </main>
+
+  <footer class="pie">
+    Tus ficheros no salen de este ordenador: todo se calcula en el navegador.
+  </footer>
+</body>
+</html>
