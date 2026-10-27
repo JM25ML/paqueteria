@@ -237,3 +237,9 @@ td.elegido { background: var(--elegido); color: var(--elegido-texto); font-weigh
 td:first-child, .tabla-resultado td:nth-child(2) { white-space: nowrap; }
 [tabindex="-1"]:focus { outline: none; }
 .desplegar { margin: -.5rem 0 1rem; }
+.fichero-cargado {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: .3rem;
+  margin: -.75rem 0 1.25rem; padding: .4rem .8rem;
+  background: var(--primario-suave); border: 1px solid var(--borde); border-radius: 8px;
+  max-width: 100%; overflow-wrap: anywhere;
+}

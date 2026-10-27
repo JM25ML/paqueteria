@@ -1,4 +1,4 @@
-import { el, poner, cabeceraPantalla } from '../dom.js';
+import { el, poner, cabeceraPantalla, etiquetaFichero } from '../dom.js';
 import { formatearNumero } from '../../logica/formato.js';
 import { normalizar } from '../../logica/normalizar.js';
 
@@ -31,7 +31,8 @@ export function render(c, { estado, ir }) {
   const verResultado = () => ir('resultado');
 
   poner(c,
-    cabeceraPantalla('Pedidos cargados', `Fichero: ${estado.nombreFichero}`, ir),
+    cabeceraPantalla('Pedidos cargados', 'Revisa los pedidos antes de calcular el resultado.', ir),
+    etiquetaFichero(estado.nombreFichero),
     el('div', { class: 'tarjetas' },
       el('div', { class: 'tarjeta' }, el('span', { class: 'tarjeta-etiqueta' }, 'Pedidos cargados'), el('span', { class: 'tarjeta-valor' }, total)),
       el('div', { class: `tarjeta ${conProblemas ? 'tarjeta-aviso' : ''}` },

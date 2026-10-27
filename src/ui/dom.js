@@ -54,6 +54,12 @@ export function botonVolver(ir) {
   return el('button', { type: 'button', class: 'boton secundario', onclick: () => ir('home') }, '← Volver a inicio');
 }
 
+// Etiqueta con el nombre del fichero de pedidos cargado.
+export function etiquetaFichero(nombre) {
+  return el('p', { class: 'fichero-cargado' },
+    el('span', { 'aria-hidden': 'true' }, '📄'), ' Fichero cargado: ', el('strong', {}, nombre));
+}
+
 export function cabeceraPantalla(titulo, subtitulo, ir) {
   return el('div', { class: 'cabecera-pantalla' },
     el('div', {},

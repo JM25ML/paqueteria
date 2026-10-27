@@ -1,4 +1,4 @@
-import { el, poner, cabeceraPantalla } from '../dom.js';
+import { el, poner, cabeceraPantalla, etiquetaFichero } from '../dom.js';
 import { resumir, calcularAhorro } from '../../logica/resumen.js';
 import { generarCsvResultado } from '../../logica/exportar.js';
 import { formatearEuros, formatearPorcentaje } from '../../logica/formato.js';
@@ -167,7 +167,8 @@ export function render(c, { estado, ir }) {
   const maxReparto = Math.max(1, ...Object.values(resumen.reparto));
 
   poner(c,
-    cabeceraPantalla('Resultado', `Transportista más barato para cada pedido de «${estado.nombreFichero}».`, ir),
+    cabeceraPantalla('Resultado', 'Transportista más barato para cada pedido.', ir),
+    etiquetaFichero(estado.nombreFichero),
     el('div', { class: 'tarjetas' },
       el('div', { class: 'tarjeta' },
         el('span', { class: 'tarjeta-etiqueta' }, 'Pedidos asignados'),
