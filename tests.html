@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tests</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; color: #1f2937; }
+    h2 { font-size: 1rem; margin: 1.5rem 0 .5rem; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { padding: .2rem 0; font-size: .9rem; }
+    .bien { color: #15803d; }
+    .mal { color: #b91c1c; font-weight: 600; }
+    .resumen { font-size: 1.3rem; padding: .8rem 1rem; border-radius: 8px; background: #f3f4f6; }
+  </style>
+</head>
+<body>
+  <h1>Tests de la lógica de cálculo</h1>
+  <p>Abre esta página con el servidor local (no con doble clic): <code>python3 -m http.server</code>.</p>
+  <div id="salida"></div>
+  <script type="module">
+    import { ejecutar } from './tests/runner.js';
+    import './tests/basicos.test.js';
+    import './tests/tarifas.test.js';
+    import './tests/pedidos.test.js';
+    import './tests/calculo.test.js';
+    import './tests/aceptacion.test.js';
+    ejecutar(document.getElementById('salida'));
+  </script>
+</body>
+</html>

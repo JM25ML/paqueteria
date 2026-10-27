@@ -1,0 +1,16 @@
+empresa,zona,plazo_dias,eur_kg_adicional,eur_bulto_adicional,peso_max_por_bulto_kg
+RápidoExpress,Z1,1,0.55,1.20,30
+RápidoExpress,Z2,1,0.65,1.20,30
+RápidoExpress,Z3,1,0.80,1.50,30
+RápidoExpress,Z4,2,1.30,2.50,30
+Transportes Levante,Z1,1,0.35,0.80,50
+Transportes Levante,Z2,1,0.40,0.80,50
+Transportes Levante,Z3,3,0.85,1.40,50
+PaqNacional,Z1,2,0.45,1.00,40
+PaqNacional,Z2,2,0.50,1.00,40
+PaqNacional,Z3,2,0.55,1.10,40
+PaqNacional,Z4,3,1.10,2.20,40
+PaqNacional,Z5,4,1.80,3.00,40
+PaqNacional,Z6,5,1.60,2.80,40
+IslasCargo,Z4,2,0.95,1.90,30
+IslasCargo,Z5,3,1.45,2.60,30

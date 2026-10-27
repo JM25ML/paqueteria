@@ -1,0 +1,53 @@
+provincia,zona,alias
+Valencia,Z1,València
+Alicante,Z2,Alacant
+Castellón,Z2,Castelló
+Murcia,Z2,
+Albacete,Z2,
+Cuenca,Z2,
+Teruel,Z2,
+Tarragona,Z2,
+A Coruña,Z3,La Coruña|Coruña
+Álava,Z3,Araba
+Almería,Z3,
+Asturias,Z3,Oviedo
+Ávila,Z3,
+Badajoz,Z3,
+Barcelona,Z3,
+Bizkaia,Z3,Vizcaya
+Burgos,Z3,
+Cáceres,Z3,
+Cádiz,Z3,
+Cantabria,Z3,Santander
+Ciudad Real,Z3,
+Córdoba,Z3,
+Gipuzkoa,Z3,Guipúzcoa
+Girona,Z3,Gerona
+Granada,Z3,
+Guadalajara,Z3,
+Huelva,Z3,
+Huesca,Z3,
+Jaén,Z3,
+La Rioja,Z3,Logroño
+León,Z3,
+Lleida,Z3,Lérida
+Lugo,Z3,
+Madrid,Z3,
+Málaga,Z3,
+Navarra,Z3,Nafarroa
+Ourense,Z3,Orense
+Palencia,Z3,
+Pontevedra,Z3,
+Salamanca,Z3,
+Segovia,Z3,
+Sevilla,Z3,
+Soria,Z3,
+Toledo,Z3,
+Valladolid,Z3,
+Zamora,Z3,
+Zaragoza,Z3,
+Illes Balears,Z4,Baleares|Islas Baleares
+Las Palmas,Z5,
+Santa Cruz de Tenerife,Z5,Tenerife
+Ceuta,Z6,
+Melilla,Z6,

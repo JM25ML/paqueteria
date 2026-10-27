@@ -1,0 +1,76 @@
+empresa,zona,peso_hasta_kg,precio_eur
+RápidoExpress,Z1,2,4.20
+RápidoExpress,Z1,5,5.10
+RápidoExpress,Z1,10,7.30
+RápidoExpress,Z1,20,11.80
+RápidoExpress,Z1,40,19.90
+RápidoExpress,Z2,2,4.90
+RápidoExpress,Z2,5,6.00
+RápidoExpress,Z2,10,8.60
+RápidoExpress,Z2,20,13.90
+RápidoExpress,Z2,40,23.50
+RápidoExpress,Z3,2,5.80
+RápidoExpress,Z3,5,7.20
+RápidoExpress,Z3,10,10.40
+RápidoExpress,Z3,20,17.20
+RápidoExpress,Z3,40,29.80
+RápidoExpress,Z4,2,9.50
+RápidoExpress,Z4,5,12.40
+RápidoExpress,Z4,10,17.90
+RápidoExpress,Z4,20,28.50
+RápidoExpress,Z4,40,49.00
+Transportes Levante,Z1,2,4.50
+Transportes Levante,Z1,5,5.20
+Transportes Levante,Z1,10,6.40
+Transportes Levante,Z1,20,9.10
+Transportes Levante,Z1,40,14.20
+Transportes Levante,Z2,2,5.10
+Transportes Levante,Z2,5,5.90
+Transportes Levante,Z2,10,7.20
+Transportes Levante,Z2,20,10.30
+Transportes Levante,Z2,40,16.10
+Transportes Levante,Z3,2,7.40
+Transportes Levante,Z3,5,9.10
+Transportes Levante,Z3,10,12.30
+Transportes Levante,Z3,20,18.60
+Transportes Levante,Z3,40,31.50
+PaqNacional,Z1,2,4.90
+PaqNacional,Z1,5,5.80
+PaqNacional,Z1,10,7.60
+PaqNacional,Z1,20,10.90
+PaqNacional,Z1,40,17.40
+PaqNacional,Z2,2,5.40
+PaqNacional,Z2,5,6.40
+PaqNacional,Z2,10,8.30
+PaqNacional,Z2,20,12.10
+PaqNacional,Z2,40,19.30
+PaqNacional,Z3,2,6.10
+PaqNacional,Z3,5,7.10
+PaqNacional,Z3,10,9.20
+PaqNacional,Z3,20,13.80
+PaqNacional,Z3,40,22.60
+PaqNacional,Z4,2,10.80
+PaqNacional,Z4,5,13.60
+PaqNacional,Z4,10,18.40
+PaqNacional,Z4,20,27.20
+PaqNacional,Z4,40,44.50
+PaqNacional,Z5,2,14.90
+PaqNacional,Z5,5,19.80
+PaqNacional,Z5,10,27.50
+PaqNacional,Z5,20,42.00
+PaqNacional,Z5,40,71.00
+PaqNacional,Z6,2,13.20
+PaqNacional,Z6,5,17.40
+PaqNacional,Z6,10,24.10
+PaqNacional,Z6,20,36.80
+PaqNacional,Z6,40,62.50
+IslasCargo,Z4,2,8.90
+IslasCargo,Z4,5,11.20
+IslasCargo,Z4,10,15.10
+IslasCargo,Z4,20,23.40
+IslasCargo,Z4,40,39.80
+IslasCargo,Z5,2,12.50
+IslasCargo,Z5,5,16.30
+IslasCargo,Z5,10,22.90
+IslasCargo,Z5,20,35.10
+IslasCargo,Z5,40,58.90
