@@ -5,15 +5,15 @@ import { normalizar } from '../../logica/normalizar.js';
 function celdaProvincia(p) {
   if (!p.provincia) return p.provinciaTexto || '(vacía)';
   const distinta = normalizar(p.provincia) !== normalizar(p.provinciaTexto);
-  return [p.provinciaTexto, el('span', { class: 'secundario' },
-    distinta ? ` → ${p.provincia} (${p.zona})` : ` (${p.zona})`)];
+  return el('span', {}, p.provinciaTexto, el('span', { class: 'secundario' },
+    distinta ? ` → ${p.provincia} (${p.zona})` : ` (${p.zona})`));
 }
 
 function celdaEstado(p) {
   if (p.problemas.length === 0) return el('span', { class: 'etiqueta ok' }, 'Correcto');
-  return p.problemas.map((pr) => el('div', { class: 'problema' },
+  return el('div', {}, p.problemas.map((pr) => el('div', { class: 'problema' },
     el('span', { class: 'etiqueta aviso' }, pr.tipo),
-    el('span', { class: 'detalle' }, pr.detalle)));
+    el('span', { class: 'detalle' }, pr.detalle))));
 }
 
 export function render(c, { estado, ir }) {
@@ -21,12 +21,12 @@ export function render(c, { estado, ir }) {
   const conProblemas = estado.pedidos.filter((p) => p.problemas.length > 0).length;
 
   const filas = estado.pedidos.map((p) => el('tr', { class: p.problemas.length ? 'fila-incidencia' : null },
-    el('td', {}, p.pedidoId),
-    el('td', {}, celdaProvincia(p)),
-    el('td', {}, p.codigoCliente),
-    el('td', { class: 'num' }, p.bultos ?? p.bultosTexto),
-    el('td', { class: 'num' }, p.pesoKg != null ? formatearNumero(p.pesoKg) : p.pesoTexto),
-    el('td', {}, celdaEstado(p))));
+    el('td', { 'data-label': 'Pedido' }, p.pedidoId),
+    el('td', { 'data-label': 'Provincia' }, celdaProvincia(p)),
+    el('td', { 'data-label': 'Código de cliente' }, p.codigoCliente),
+    el('td', { class: 'num', 'data-label': 'Bultos' }, p.bultos ?? p.bultosTexto),
+    el('td', { class: 'num', 'data-label': 'Peso total (kg)' }, p.pesoKg != null ? formatearNumero(p.pesoKg) : p.pesoTexto),
+    el('td', { 'data-label': 'Estado' }, celdaEstado(p))));
 
   const verResultado = () => ir('resultado');
 
@@ -43,7 +43,7 @@ export function render(c, { estado, ir }) {
     el('div', { class: 'acciones' },
       el('button', { type: 'button', class: 'boton', onclick: verResultado }, 'Ver resultado →')),
     el('div', { class: 'tabla-contenedor' },
-      el('table', {},
+      el('table', { class: 'tabla-tarjetas' },
         el('thead', {}, el('tr', {},
           el('th', { scope: 'col' }, 'Pedido'),
           el('th', { scope: 'col' }, 'Provincia'),

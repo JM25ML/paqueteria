@@ -1,49 +1,57 @@
 :root {
-  --fondo: #f5f6f8;
+  --fondo: #f3f6f4;
   --superficie: #ffffff;
-  --texto: #1c2430;
-  --texto-suave: #5b6675;
-  --borde: #dfe3e8;
-  --primario: #1f5fbf;
-  --primario-hover: #184c99;
-  --primario-suave: #e8f0fc;
+  --texto: #18261e;
+  --texto-suave: #56665c;
+  --borde: #d9e2dc;
+  --primario: #1d5c3c;
+  --primario-hover: #154a30;
+  --primario-suave: #e4f0e8;
   --sobre-primario: #ffffff;
-  --elegido: #dff3e6;
-  --elegido-texto: #14653a;
+  --marca: #173f2b;
+  --sobre-marca: #ffffff;
+  --elegido: #cdebd8;
+  --elegido-texto: #0f4a2b;
   --aviso: #fff4e0;
-  --aviso-borde: #f0b44c;
-  --aviso-texto: #8a4b00;
+  --aviso-borde: #e0a43c;
+  --aviso-texto: #7d4400;
   --error: #fdecec;
   --error-borde: #e07070;
   --error-texto: #9b1c1c;
-  --exito: #e7f6ec;
-  --exito-texto: #14653a;
+  --exito: #e4f0e8;
+  --exito-texto: #1d5c3c;
+  --ayuda-fondo: #173f2b;
+  --ayuda-texto: #ffffff;
   --radio: 10px;
-  --sombra: 0 1px 2px rgb(16 24 40 / .06), 0 1px 3px rgb(16 24 40 / .08);
+  --sombra: 0 1px 2px rgb(16 40 24 / .06), 0 1px 3px rgb(16 40 24 / .08);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fondo: #12161c;
-    --superficie: #1b2129;
-    --texto: #e6e9ee;
-    --texto-suave: #9aa5b4;
-    --borde: #2e3743;
-    --primario: #6ea3f0;
-    --primario-hover: #8db8f5;
-    --primario-suave: #1d2b40;
-    --sobre-primario: #0d1420;
-    --elegido: #173a26;
-    --elegido-texto: #8fe0ad;
+    --fondo: #0e1511;
+    --superficie: #16211b;
+    --texto: #e2ebe5;
+    --texto-suave: #94a69a;
+    --borde: #283a30;
+    --primario: #5fbf8b;
+    --primario-hover: #7fd3a5;
+    --primario-suave: #1a3327;
+    --sobre-primario: #0a1a11;
+    --marca: #10291c;
+    --sobre-marca: #e2ebe5;
+    --elegido: #1f4a33;
+    --elegido-texto: #a3e6bf;
     --aviso: #3a2c12;
     --aviso-borde: #a4752a;
     --aviso-texto: #f3c77a;
     --error: #3d1b1b;
     --error-borde: #b55454;
     --error-texto: #f5a3a3;
-    --exito: #16301f;
-    --exito-texto: #8fe0ad;
+    --exito: #1a3327;
+    --exito-texto: #a3e6bf;
+    --ayuda-fondo: #e2ebe5;
+    --ayuda-texto: #0e1511;
     --sombra: none;
     color-scheme: dark;
   }
@@ -64,11 +72,10 @@ body {
 }
 
 .barra {
-  background: var(--superficie);
-  border-bottom: 1px solid var(--borde);
+  background: var(--marca);
   padding: .8rem 16px;
 }
-.marca { font-weight: 700; color: var(--texto); text-decoration: none; font-size: 1.05rem; }
+.marca { font-weight: 700; color: var(--sobre-marca); text-decoration: none; font-size: 1.05rem; }
 
 main { flex: 1; width: 100%; max-width: 1200px; margin: 0 auto; padding: 1.5rem 16px 3rem; outline: none; }
 .pie { text-align: center; color: var(--texto-suave); font-size: .85rem; padding: 1rem 16px 1.5rem; }
@@ -220,11 +227,10 @@ td.elegido { background: var(--elegido); color: var(--elegido-texto); font-weigh
 .ayuda-flotante {
   position: fixed; z-index: 100; pointer-events: none;
   max-width: 260px; padding: .45rem .6rem; border-radius: 6px;
-  background: #1c2430; color: #fff;
+  background: var(--ayuda-fondo); color: var(--ayuda-texto);
   font-size: .82rem; line-height: 1.35;
   box-shadow: 0 4px 12px rgb(0 0 0 / .25);
 }
-@media (prefers-color-scheme: dark) { .ayuda-flotante { background: #e6e9ee; color: #12161c; } }
 .solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 @media (max-width: 640px) {
@@ -242,4 +248,45 @@ td:first-child, .tabla-resultado td:nth-child(2) { white-space: nowrap; }
   margin: -.75rem 0 1.25rem; padding: .4rem .8rem;
   background: var(--primario-suave); border: 1px solid var(--borde); border-radius: 8px;
   max-width: 100%; overflow-wrap: anywhere;
+}
+
+/* --- Controles de la barra de herramientas --- */
+.control { display: inline-flex; align-items: center; gap: .4rem; }
+.motivo-movil, .solo-movil { display: none; }
+
+/* --- Móvil: cada fila de la tabla se muestra como una tarjeta --- */
+@media (max-width: 700px) {
+  main { padding-top: 1rem; }
+  .solo-movil { display: inline-flex; }
+  .solo-escritorio { display: none; }
+  .barra-herramientas { flex-direction: column; align-items: stretch; }
+  .control { display: flex; justify-content: space-between; }
+  .barra-herramientas > * { min-width: 0; max-width: 100%; }
+  .control select { flex: 1; min-width: 0; width: 100%; }
+  .barra-herramientas .boton { justify-content: center; }
+  .acciones .boton { flex: 1; justify-content: center; }
+
+  .tabla-contenedor { overflow: visible; background: none; border: none; box-shadow: none; }
+  .tabla-tarjetas, .tabla-tarjetas tbody, .tabla-tarjetas tr, .tabla-tarjetas td { display: block; width: 100%; }
+  .tabla-tarjetas thead { display: none; }
+  .tabla-tarjetas tr {
+    background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
+    box-shadow: var(--sombra); margin-bottom: .75rem; padding: .25rem .9rem; overflow: hidden;
+  }
+  .tabla-tarjetas tbody tr:hover { background: var(--superficie); }
+  .tabla-tarjetas tr.fila-incidencia { background: var(--aviso); border-left: 4px solid var(--aviso-borde); }
+  .tabla-tarjetas td {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding: .45rem 0; border-bottom: 1px dashed var(--borde); text-align: right; white-space: normal;
+  }
+  .tabla-tarjetas td::before { content: attr(data-label); color: var(--texto-suave); font-size: .85rem; font-weight: 400; text-align: left; flex-shrink: 0; }
+  .tabla-tarjetas td:last-child { border-bottom: none; }
+  .tabla-tarjetas td:empty { display: none; }
+  .tabla-tarjetas td:first-child { font-size: 1.05rem; font-weight: 700; box-shadow: none; }
+  .tabla-tarjetas td.elegido { width: auto; margin: 0 -.9rem; padding: .45rem .9rem; }
+  .tabla-tarjetas td.vacio { justify-content: center; }
+  .tabla-tarjetas td.vacio::before { content: none; }
+  .tabla-tarjetas .problema { align-items: flex-end; text-align: right; }
+  .no-sirve { border-bottom: none; padding: 0; }
+  .motivo-movil { display: inline; color: var(--texto-suave); font-size: .85rem; margin-left: .3rem; }
 }

@@ -14,6 +14,7 @@ function valorOrden(r, columna) {
   switch (columna) {
     case 'pedido': return r.pedido.pedidoId;
     case 'cliente': return r.pedido.codigoCliente;
+    case 'provincia': return r.pedido.provincia ?? r.pedido.provinciaTexto;
     case 'elegido': return r.elegido ?? null;
     case 'importe': return r.importe;
     default: {
@@ -45,30 +46,37 @@ function filtrar(resultados, filtro) {
 
 function celdaEmpresa(r, empresa) {
   const o = r.opciones[empresa];
-  if (!o) return el('td', { class: 'num' });
+  const etiqueta = { 'data-label': empresa };
+  if (!o) return el('td', { class: 'num', ...etiqueta });
   if (!o.puede) {
-    return el('td', { class: 'num' }, el('span', {
-      class: 'no-sirve',
-      tabindex: '0',
-      'data-motivo': o.texto,
-      'aria-label': `${empresa} no puede servirlo: ${o.texto}`,
-    }, '—'));
+    return el('td', { class: 'num', ...etiqueta }, el('span', {},
+      el('span', {
+        class: 'no-sirve',
+        tabindex: '0',
+        'data-motivo': o.texto,
+        'aria-label': `${empresa} no puede servirlo: ${o.texto}`,
+      }, '—'),
+      el('span', { class: 'motivo-movil', 'aria-hidden': 'true' }, o.corto)));
   }
   if (r.elegido === empresa) {
-    return el('td', { class: 'num elegido' }, el('span', { class: 'solo-lector' }, 'Elegido: '), formatearEuros(o.importe));
+    return el('td', { class: 'num elegido', ...etiqueta }, el('span', {}, el('span', { class: 'solo-lector' }, 'Elegido: '), formatearEuros(o.importe)));
   }
-  return el('td', { class: 'num' }, formatearEuros(o.importe));
+  return el('td', { class: 'num', ...etiqueta }, formatearEuros(o.importe));
 }
 
 function fila(r, empresas) {
   const inc = r.estado === 'incidencia';
+  const p = r.pedido;
   return el('tr', { class: inc ? 'fila-incidencia' : null },
-    el('td', {}, r.pedido.pedidoId),
-    el('td', {}, r.pedido.codigoCliente),
-    el('td', {}, inc
+    el('td', { 'data-label': 'Pedido' }, p.pedidoId),
+    el('td', { 'data-label': 'Código de cliente' }, p.codigoCliente),
+    el('td', { 'data-label': 'Provincia' }, p.provincia
+      ? p.provincia
+      : el('span', { class: 'secundario', title: 'Provincia no reconocida' }, p.provinciaTexto || '(vacía)')),
+    el('td', { 'data-label': 'Transportista elegido' }, inc
       ? el('div', { class: 'problema' }, el('span', { class: 'etiqueta aviso' }, r.incidencia), el('span', { class: 'detalle' }, r.detalle))
       : el('strong', {}, r.elegido)),
-    el('td', { class: 'num importe' }, inc ? '' : formatearEuros(r.importe)),
+    el('td', { class: 'num importe', 'data-label': 'Importe' }, inc ? '' : formatearEuros(r.importe)),
     empresas.map((e) => celdaEmpresa(r, e)));
 }
 
@@ -121,14 +129,32 @@ export function render(c, { estado, ir }) {
     const visibles = ordenar(filtrar(resultados, estado.filtro), estado.orden);
     cuerpoTabla.replaceChildren(...(visibles.length
       ? visibles.map((r) => fila(r, empresas))
-      : [el('tr', {}, el('td', { colspan: String(4 + empresas.length), class: 'vacio' }, 'Ningún pedido coincide con el filtro.'))]));
+      : [el('tr', {}, el('td', { colspan: String(5 + empresas.length), class: 'vacio' }, 'Ningún pedido coincide con el filtro.'))]));
     contador.textContent = `Mostrando ${visibles.length} de ${resultados.length} pedidos`;
     for (const { th, columna } of cabeceras) {
       const activa = estado.orden.columna === columna;
       th.setAttribute('aria-sort', activa ? (estado.orden.ascendente ? 'ascending' : 'descending') : 'none');
       th.querySelector('.flecha').textContent = activa ? (estado.orden.ascendente ? '▲' : '▼') : '';
     }
+    const valor = estado.orden.columna ? `${estado.orden.columna}|${estado.orden.ascendente ? 1 : 0}` : '';
+    selectorOrden.value = [...selectorOrden.options].some((o) => o.value === valor) ? valor : '';
   }
+
+  // Selector de orden para el móvil, donde no se ven los títulos de columna.
+  const selectorOrden = el('select', {
+    id: 'orden',
+    onchange: (e) => {
+      const [columna, asc] = e.target.value.split('|');
+      estado.orden = columna ? { columna, ascendente: asc === '1' } : { columna: null, ascendente: true };
+      pintarTabla();
+    },
+  },
+  el('option', { value: '' }, 'Orden del fichero'),
+  el('option', { value: 'pedido|1' }, 'Pedido'),
+  el('option', { value: 'provincia|1' }, 'Provincia'),
+  el('option', { value: 'elegido|1' }, 'Transportista elegido'),
+  el('option', { value: 'importe|0' }, 'Importe (mayor primero)'),
+  el('option', { value: 'importe|1' }, 'Importe (menor primero)'));
 
   function cabecera(texto, columna, num = false) {
     const boton = el('button', {
@@ -154,10 +180,11 @@ export function render(c, { estado, ir }) {
   empresas.map((e) => el('option', { value: `emp:${e}`, selected: estado.filtro === `emp:${e}` },
     `Asignados a ${e} (${resumen.reparto[e]})`)));
 
-  const tabla = el('table', { class: 'tabla-resultado' },
+  const tabla = el('table', { class: 'tabla-resultado tabla-tarjetas' },
     el('thead', {}, el('tr', {},
       cabecera('Pedido', 'pedido'),
       cabecera('Código de cliente', 'cliente'),
+      cabecera('Provincia', 'provincia'),
       cabecera('Transportista elegido', 'elegido'),
       cabecera('Importe', 'importe', true),
       empresas.map((e) => cabecera(e, `emp:${e}`, true)))),
@@ -191,7 +218,8 @@ export function render(c, { estado, ir }) {
             el('span', { style: `width:${(resumen.reparto[e] / maxReparto) * 100}%` })),
           el('span', { class: 'reparto-num' }, resumen.reparto[e])))))),
     el('div', { class: 'barra-herramientas' },
-      el('label', { for: 'filtro' }, 'Mostrar: '), selectorFiltro,
+      el('span', { class: 'control' }, el('label', { for: 'filtro' }, 'Mostrar: '), selectorFiltro),
+      el('span', { class: 'control solo-movil' }, el('label', { for: 'orden' }, 'Ordenar por: '), selectorOrden),
       contador,
       el('button', {
         type: 'button', class: 'boton secundario',
@@ -199,8 +227,9 @@ export function render(c, { estado, ir }) {
       }, '⬇ Descargar resultado (CSV)')),
     el('p', { class: 'leyenda' },
       el('span', { class: 'muestra-elegido' }, 'Resaltado'), ' = transportista elegido. ',
-      '«—» = ese transportista no puede servirlo (pasa el ratón por encima para ver el motivo). ',
-      'Pulsa en el título de una columna para ordenar.'),
+      '«—» = ese transportista no puede servirlo',
+      el('span', { class: 'solo-escritorio' }, ' (pasa el ratón por encima para ver el motivo)'), '. ',
+      el('span', { class: 'solo-escritorio' }, 'Pulsa en el título de una columna para ordenar.')),
     el('div', { class: 'tabla-contenedor' }, tabla),
     el('div', { class: 'acciones' },
       el('button', { type: 'button', class: 'boton secundario', onclick: () => ir('home') }, '← Volver a inicio')),
